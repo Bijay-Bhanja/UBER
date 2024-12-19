@@ -187,3 +187,95 @@ curl -X POST http://localhost:4000/users/login \
   }
 }
 ```
+
+# User Profile Endpoint
+
+## Endpoint: `/users/profile`
+
+### Method: GET
+
+### Description:
+This endpoint is used to retrieve the profile of the authenticated user.
+
+### Responses:
+
+#### Success (200 OK):
+- **Description**: User profile retrieved successfully.
+  ```json
+  {
+    "_id": "USER_ID_HERE",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "john.doe@example.com"
+  }
+  ```
+
+#### Error (401 Unauthorized):
+- **Description**: User is not authenticated.
+- **Body**:
+  ```json
+  {
+    "message": "Authentication required"
+  }
+  ```
+
+### Example Request:
+```sh
+curl -X GET http://localhost:4000/users/profile \
+-H "Authorization: Bearer JWT_TOKEN_HERE"
+```
+
+### Example Response:
+```json
+{
+  "_id": "USER_ID_HERE",
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "john.doe@example.com"
+}
+```
+
+# User Logout Endpoint
+
+## Endpoint: `/users/logout`
+
+### Method: GET
+
+### Description:
+This endpoint is used to log out the authenticated user. It clears the authentication token and adds it to the blacklist.
+
+### Responses:
+
+#### Success (200 OK):
+- **Description**: User logged out successfully.
+  ```json
+  {
+    "message": "Logged out successfully"
+  }
+  ```
+
+#### Error (401 Unauthorized):
+- **Description**: User is not authenticated.
+- **Body**:
+  ```json
+  {
+    "message": "Authentication required"
+  }
+  ```
+
+### Example Request:
+```sh
+curl -X GET http://localhost:4000/users/logout \
+-H "Authorization: Bearer JWT_TOKEN_HERE"
+```
+
+### Example Response:
+```json
+{
+  "message": "Logged out successfully"
+}
+```
